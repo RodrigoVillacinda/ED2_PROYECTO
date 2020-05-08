@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace ED2_PROYECTO.Models.Estruct
 {
-    public class Node<T> : IEquatable<Node<T>> 
+    public class Node<T> : IEquatable<Node<T>>
     {
         public Node<T> next = null;
         public BStarTreeNode<T> elem;

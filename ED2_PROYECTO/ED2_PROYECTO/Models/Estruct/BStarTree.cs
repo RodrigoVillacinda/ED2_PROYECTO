@@ -1,33 +1,30 @@
 ﻿using ED2_PROYECTO.Models.Estruct.Disk;
 using ED2_PROYECTO.Models.Estruct.Interface;
+using Nancy.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace ED2_PROYECTO.Models.Estruct
 {
-	public class BStarTree<T> where T : IComparable, IFixedSizeText 
+	public class BStarTree<T> where T : IComparable
 	{
 		internal BStarTreeNode<T> root;
 		internal int maxNodeSize;
 		internal int rootSize;
-		public int PosicionDisponible { get; set; }
-		public string RutaArbol { get; set; }
 		public static List<T> st = new List<T>();
+		private List<object> ArbolDisco = new List<object>();
+		JavaScriptSerializer Serializer = new JavaScriptSerializer();
 
 		//ya esta---------------------------------------------
-		public BStarTree(int grado, string ruta, string archivo)
+		public BStarTree(int m)
 		{
 			this.root = null;
-			this.maxNodeSize = grado - 1;
-			this.rootSize = (int)(2 * (Math.Floor((double)(2 * grado - 1) / 3)) + 1);
-			RutaArbol = ruta + archivo;
-			BWriter<T>.EvaluarRuta(ruta);
-			BWriter<T>.EscribirRaiz(RutaArbol, int.MinValue);
-			BWriter<T>.EscribirPosicionDisponible(RutaArbol, 1);
-			PosicionDisponible = 1;
+			this.maxNodeSize = m - 1;
+			this.rootSize = (int)(2 * (Math.Floor((double)(2 * m - 1) / 3)) + 1);
 		}
 
 		public virtual bool insertIntoNode(BStarTreeNode<T> node, T element)
@@ -237,20 +234,16 @@ namespace ED2_PROYECTO.Models.Estruct
 			return node; //ver
 		}
 
-		//inicia inserción
 		public virtual bool insertElement(T element)
 		{
-			root.posicion = BReader<T>.LeerRaiz(RutaArbol);
 			if (root == null)
 			{
 				root = new BStarTreeNode<T>(element, rootSize);
 				root.initializeChildren();
-				BWriter<T>.EscribirNodo(RutaArbol, root, PosicionDisponible);
 				return true;
 			}
 			else
 			{
-
 				BStarTreeNode<T> nodeToInsertInto = findToInsert(element);
 				if (spacesLeftInNode(nodeToInsertInto) == 0)
 				{
@@ -945,5 +938,53 @@ namespace ED2_PROYECTO.Models.Estruct
 
 		}
 
+
+		public void InsertarEnDisco(T element)
+		{
+			ArbolDisco.Add(element);
+			string path = @"C:\Users\alexa\OneDrive\Escritorio\Example.txt"; //Ruta de creacion del arbol en disco
+			if (!File.Exists(path))
+			{
+				using (var tw = new StreamWriter(path, true))
+				{
+					tw.WriteLine(ToJSON(ArbolDisco));
+				}
+			}
+			else if (File.Exists(path))
+			{
+				ArbolDisco.Clear();
+				string arbol = LeerEnDisco(path);
+				Object[] obj = (Object[])Serializer.Deserialize<Object>(arbol);
+
+				for (int i = 0; i < obj.Length; i++)
+				{
+					ArbolDisco.Add(obj[i]);
+				}
+
+				ArbolDisco.Add(element);
+				File.Delete(path);
+				using (var tw = new StreamWriter(path, true))
+				{
+					tw.WriteLine(ToJSON(ArbolDisco));
+				}
+			}
+		}
+
+		private string LeerEnDisco(string path)
+		{
+
+			string arbol = "";
+			using (StreamReader reader = new StreamReader(path))
+			{
+				arbol = reader.ReadToEnd();
+			}
+
+			return arbol;
+		}
+
+		private string ToJSON(object obj)
+		{
+			return Serializer.Serialize(obj);
+		}
 	}
 }
