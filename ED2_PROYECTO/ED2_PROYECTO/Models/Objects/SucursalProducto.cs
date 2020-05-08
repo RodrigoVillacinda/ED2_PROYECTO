@@ -5,7 +5,8 @@ using System.Threading.Tasks;
 
 namespace ED2_PROYECTO.Models.Objects
 {
-    public class SucursalProducto
+    public class SucursalProducto :  Sucursal 
     {
+        public int CantidadInventario { get; set; }
     }
 }

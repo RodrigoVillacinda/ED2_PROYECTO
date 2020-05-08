@@ -7,5 +7,6 @@ namespace ED2_PROYECTO.Models.Functioning
 {
     public class AddProcductos
     {
+
     }
 }
