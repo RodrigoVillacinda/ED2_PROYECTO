@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ED2_PROYECTO.Models.Estruct.Interface;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 namespace ED2_PROYECTO.Models.Estruct
 {
 	//
-	public class BStarTreeNode<T> : IEquatable<BStarTreeNode<T>> 
+	public class BStarTreeNode<T> : IEquatable<BStarTreeNode<T>>, IFixedSizeText where T : IFixedSizeText
 	{
 		public T[] keys;
 		public BStarTreeNode<T>[] children = null;
@@ -25,12 +26,12 @@ namespace ED2_PROYECTO.Models.Estruct
 
 			for (int i = 0; i < Grado; i++)
 			{
-				FixedString += $"{children[i].ToString("00000000000;-0000000000")}|";
+				FixedString += $"{children[i].ToString() == ("00000000000;-0000000000")}|";
 			}
 
 			for (int i = 0; i < Grado - 1; i++)
 			{
-				if (Valores[i] != null)
+				if (keys[i] != null)
 				{
 					FixedString += $"{keys[i].ToFixedSizeString()}|";
 				}

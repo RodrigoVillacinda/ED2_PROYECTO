@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ED2_PROYECTO.Models.Estruct.Disk;
+using ED2_PROYECTO.Models.Estruct.Interface;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -6,19 +8,26 @@ using System.Threading.Tasks;
 
 namespace ED2_PROYECTO.Models.Estruct
 {
-	public class BStarTree<T> where T : IComparable
+	public class BStarTree<T> where T : IComparable, IFixedSizeText 
 	{
 		internal BStarTreeNode<T> root;
 		internal int maxNodeSize;
 		internal int rootSize;
+		public int PosicionDisponible { get; set; }
+		public string RutaArbol { get; set; }
 		public static List<T> st = new List<T>();
 
 		//ya esta---------------------------------------------
-		public BStarTree(int m)
+		public BStarTree(int grado, string ruta, string archivo)
 		{
 			this.root = null;
-			this.maxNodeSize = m - 1;
-			this.rootSize = (int)(2 * (Math.Floor((double)(2 * m - 1) / 3)) + 1);
+			this.maxNodeSize = grado - 1;
+			this.rootSize = (int)(2 * (Math.Floor((double)(2 * grado - 1) / 3)) + 1);
+			RutaArbol = ruta + archivo;
+			BWriter<T>.EvaluarRuta(ruta);
+			BWriter<T>.EscribirRaiz(RutaArbol, int.MinValue);
+			BWriter<T>.EscribirPosicionDisponible(RutaArbol, 1);
+			PosicionDisponible = 1;
 		}
 
 		public virtual bool insertIntoNode(BStarTreeNode<T> node, T element)
@@ -228,16 +237,20 @@ namespace ED2_PROYECTO.Models.Estruct
 			return node; //ver
 		}
 
+		//inicia inserción
 		public virtual bool insertElement(T element)
 		{
+			root.posicion = BReader<T>.LeerRaiz(RutaArbol);
 			if (root == null)
 			{
 				root = new BStarTreeNode<T>(element, rootSize);
 				root.initializeChildren();
+				BWriter<T>.EscribirNodo(RutaArbol, root, PosicionDisponible);
 				return true;
 			}
 			else
 			{
+
 				BStarTreeNode<T> nodeToInsertInto = findToInsert(element);
 				if (spacesLeftInNode(nodeToInsertInto) == 0)
 				{
