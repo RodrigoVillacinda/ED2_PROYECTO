@@ -231,8 +231,7 @@ namespace ED2_PROYECTO.Models.Estruct
                 Valor7 = Convert.ToString(ArregloCaracteres[i + 6]);
                 Valor8 = Convert.ToString(ArregloCaracteres[i + 7]);
                 Valor = Valor1 + Valor2 + Valor3 + Valor4 + Valor5 + Valor6 + Valor7 + Valor8;
-                //Valor = Convert.ToString(ArregloCaracteres[i] + ArregloCaracteres[i + 1] + ArregloCaracteres[i + 2] + ArregloCaracteres[i + 3] + ArregloCaracteres[i + 4] + ArregloCaracteres[i + 5] + ArregloCaracteres[i + 6] + ArregloCaracteres[i + 7]);
-                Llave = Convert.ToInt32(ArregloCaracteres[i + 8]);
+                
                 Diccionario.Add(Llave, Valor);
             }
             ListaDiccionario.Clear();

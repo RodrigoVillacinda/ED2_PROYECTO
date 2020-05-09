@@ -5,9 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ED2_PROYECTO.Models.Data
+namespace ED2_PROYECTO.Models.Functioning
 {
-    public class ArbolSucursal
+    public class UpdateDatosSucursal
     {
         public static BStarTree<Sucursal> arbol = new BStarTree<Sucursal>(7);
         public static SDES sdes = new SDES();
@@ -16,8 +16,7 @@ namespace ED2_PROYECTO.Models.Data
         {
             id = sucursal.ID_Sucursal;
             sucursal.Nombre = sdes.Encriptar(id, sucursal.Nombre);
-            sucursal.Direccion = sdes.Encriptar(id, sucursal.Direccion);  
-            //sucursal.Precio = Double.Parse(sdes.Encriptar(id, sucursal.Precio.ToString()));
+            sucursal.Direccion = sdes.Encriptar(id, sucursal.Direccion);
             arbol.ruta = path;
             arbol.insertElement(sucursal);
 
