@@ -18,6 +18,7 @@ namespace ED2_PROYECTO.Models.Estruct
 		public static List<T> st = new List<T>();
 		private List<object> ArbolDisco = new List<object>();
 		JavaScriptSerializer Serializer = new JavaScriptSerializer();
+		public string ruta { get; set; }
 
 		//ya esta---------------------------------------------
 		public BStarTree(int m)
@@ -942,7 +943,7 @@ namespace ED2_PROYECTO.Models.Estruct
 		public void InsertarEnDisco(T element)
 		{
 			ArbolDisco.Add(element);
-			string path = @"C:\Users\alexa\OneDrive\Escritorio\Example.txt"; //Ruta de creacion del arbol en disco
+			string path = ruta + "Example.txt"; //Ruta de creacion del arbol en disco
 			if (!File.Exists(path))
 			{
 				using (var tw = new StreamWriter(path, true))
