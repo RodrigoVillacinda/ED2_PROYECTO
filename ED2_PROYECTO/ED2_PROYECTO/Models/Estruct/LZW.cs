@@ -216,7 +216,7 @@ namespace ED2_PROYECTO.Models.Estruct
         {
             string Valor1 = "", Valor2 = "", Valor3 = "", Valor4 = "", Valor5 = "", Valor6 = "", Valor7 = "", Valor8 = "", Valor = "";
 
-            int Llave;
+            int Llave=0; //ver--------------------------
             byte[] ArrayDiccionario = ListaDiccionario.ToArray();
             string Valores = Encoding.UTF8.GetString(ArrayDiccionario);
             char[] ArregloCaracteres = Valores.ToCharArray();

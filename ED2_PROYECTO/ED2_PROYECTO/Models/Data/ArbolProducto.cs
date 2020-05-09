@@ -17,8 +17,8 @@ namespace ED2_PROYECTO.Models.Data
         public static void AgregarProucto(string path, Producto producto)
         {
             id = producto.ID_Producto;
-            producto.Nombre = sdes.Encriptar(id, producto.Nombre);
-            producto.Precio = Double.Parse( sdes.Encriptar(id, producto.Precio.ToString()));
+           // producto.Nombre = sdes.Encriptar(id, producto.Nombre);
+            //producto.Precio = ( sdes.Encriptar(id, producto.Precio.ToString()));
             arbol.ruta = path;
             arbol.insertElement(producto);
         

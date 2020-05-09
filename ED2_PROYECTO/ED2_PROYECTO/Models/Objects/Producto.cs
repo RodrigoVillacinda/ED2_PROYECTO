@@ -9,7 +9,7 @@ namespace ED2_PROYECTO.Models.Objects
     {
         public int ID_Producto { get; set; }
         public string Nombre { get; set; }
-        public double Precio { get; set; }
+        public string Precio { get; set; }
         public int CompareTo(object obj)
         {
             return this.ID_Producto.CompareTo(((Producto)obj).ID_Producto);

@@ -17,7 +17,7 @@ namespace ED2_PROYECTO.Models.Data
         {
             id = sucursalproducto.ID_Sucursal;
             id = sucursalproducto.ID_Producto;
-            sucursalproducto.CantidadInventario = sdes.Encriptar(id, sucursalproducto.CantidadInventario.ToString();
+           
             
             arbol.ruta = path;
             arbol.insertElement(sucursalproducto);

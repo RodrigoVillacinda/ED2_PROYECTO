@@ -29,8 +29,8 @@ namespace ED2_PROYECTO.Models.Estruct.Disk
         {
             using (var fs = new FileStream(ruta, FileMode.OpenOrCreate))
             {
-                fs.Seek(24 + ((posicion - 1) * BStarTreeNode<T>.FixedSize), SeekOrigin.Begin);
-                fs.Write(ByteGenerator.ConvertToBytes(nodo.ToFixedSizeString()), 0, BStarTreeNode<T>.FixedSize);
+                //fs.Seek(24 + ((posicion - 1) * BStarTreeNode<T>.FixedSize), SeekOrigin.Begin);
+                //fs.Write(ByteGenerator.ConvertToBytes(nodo.ToFixedSizeString()), 0, BStarTreeNode<T>.FixedSize);
             }
         }
 

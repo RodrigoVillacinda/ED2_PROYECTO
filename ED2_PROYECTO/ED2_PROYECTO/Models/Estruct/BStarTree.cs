@@ -1,6 +1,7 @@
 ﻿using ED2_PROYECTO.Models.Estruct.Disk;
 using ED2_PROYECTO.Models.Estruct.Interface;
 using Nancy.Json;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -942,26 +943,19 @@ namespace ED2_PROYECTO.Models.Estruct
 
 		public void InsertarEnDisco(T element)
 		{
-			ArbolDisco.Add(element);
-			string path = ruta + "Example.txt"; //Ruta de creacion del arbol en disco
+			string path = ruta; //Ruta de creacion del arbol en disco
 			if (!File.Exists(path))
 			{
 				using (var tw = new StreamWriter(path, true))
 				{
-					tw.WriteLine(ToJSON(ArbolDisco));
+					tw.WriteLine(ToJSON(element));
 				}
+				ArbolDisco.Add(element);
 			}
 			else if (File.Exists(path))
 			{
-				ArbolDisco.Clear();
 				string arbol = LeerEnDisco(path);
-				Object[] obj = (Object[])Serializer.Deserialize<Object>(arbol);
-
-				for (int i = 0; i < obj.Length; i++)
-				{
-					ArbolDisco.Add(obj[i]);
-				}
-
+				object obj = Serializer.DeserializeObject(arbol);
 				ArbolDisco.Add(element);
 				File.Delete(path);
 				using (var tw = new StreamWriter(path, true))
