@@ -660,7 +660,7 @@ namespace ED2_PROYECTO.Models.Estruct
 		{
 			string treeString = "";
 
-			Queue<T> queue = new Queue<T>();
+			Queue2<T> queue = new Queue2<T>();
 
 			Node<T> nodePointer = new Node<T>(root);
 

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace ED2_PROYECTO.Models.Estruct
 {
-	public class Queue<T>
+	public class Queue2<T>
 	{
 
 		public Node<T> root = null;
