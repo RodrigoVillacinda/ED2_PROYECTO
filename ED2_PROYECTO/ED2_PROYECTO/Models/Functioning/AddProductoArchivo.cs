@@ -38,7 +38,7 @@ namespace ED2_PROYECTO.Models.Functioning
         {
             string linea = "";
             lecturaArchivo = new StreamReader(path);//Ruta del archivo a cargar
-            testingTree2.ruta = ruta + "IngresoCSV.tx";
+            testingTree2.ruta = ruta + "IngresoCSV.txt";
             while ((linea = lecturaArchivo.ReadLine()) != null)
             {
                 string[] datos = linea.Split(';');

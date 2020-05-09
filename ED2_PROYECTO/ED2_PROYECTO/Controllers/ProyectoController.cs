@@ -50,7 +50,7 @@ namespace ED2_PROYECTO.Controllers
         }
 
         [HttpPost("BstarTree/insert/productosucursal")]
-        public IEnumerable<Producto> PostProductSucursal(Data data)
+        public IEnumerable<Producto> PostProductSucursal([FromForm]Data data)
         {
 
             AddProductoSucursal.AgregarProuctoSucursal(data.Ruta, new SucursalProducto { ID_Producto = id, ID_Sucursal = id, CantidadInventario = data.Cantidad.ToString() });
@@ -66,7 +66,7 @@ namespace ED2_PROYECTO.Controllers
 
         }
         [HttpPost("BstarTree/insert/sucursal")]
-        public IEnumerable<Producto> PostSucursal(Data data)
+        public IEnumerable<Producto> PostSucursal([FromForm]Data data)
         {
 
             AddSucursal.AgregarSucursal(data.Ruta, new Sucursal { ID_Sucursal = id, Nombre = data.Nombre, Direccion = data.Direccion });
@@ -80,7 +80,7 @@ namespace ED2_PROYECTO.Controllers
 
         }
         [HttpPost("BstarTree/insert/productFile")]
-        public IEnumerable<Producto> PostProductFile(Data data)
+        public IEnumerable<Producto> PostProductFile([FromForm]Data data)
         {
            
             if (data.Archivo.Length > 0)
