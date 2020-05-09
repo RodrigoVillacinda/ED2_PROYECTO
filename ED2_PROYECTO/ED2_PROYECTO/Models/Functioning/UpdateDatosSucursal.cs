@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ED2_PROYECTO.Models.Functioning
 {
-    public class AddSucursal
+    public class UpdateDatosSucursal
     {
         public static BStarTree<Sucursal> arbol = new BStarTree<Sucursal>(7);
         public static SDES sdes = new SDES();
@@ -21,5 +21,6 @@ namespace ED2_PROYECTO.Models.Functioning
             arbol.insertElement(sucursal);
 
         }
+
     }
 }
